@@ -82,13 +82,13 @@ function count_rows_log_return($table) {
 }
 
 function CountMessage() {
-	$result = mysql_query("SELECT * FROM message WHERE deleted = '0' AND viewed = '0'");
+	$result = mysql_query("SELECT id FROM message WHERE deleted = '0' AND viewed = '0'");
 	$num_rows = mysql_num_rows($result);
 
 	if($num_rows < 1){
-		echo "0";
+		return "0";
 	} else {
-		echo $num_rows;
+		return $num_rows;
 	}
 }
 

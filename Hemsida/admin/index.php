@@ -1,3 +1,6 @@
+<?php
+require('../assets/functions.php');
+?>
 <html>
 	<head>
 		<title>Adminpanelen</title>
@@ -13,7 +16,13 @@
 				  	<li><a class="btn" href="#">Alla sidor</a></li>
 				  	<li><a class="btn" href="#">Alla användare</a></li>
 				  	<li class="pull-right">
-				  		<a class="btn" href="#">Meddelanden (<?php CountMessage(); ?>)</a>
+				  		<?php
+				  		if(CountMessage() == 0){
+				  			?><a class="btn" href="#">Meddelanden (<?php echo CountMessage(); ?>)</a><?php
+				  		} else {
+				  			?><a class="btn" href="#"><strong>Meddelanden (<?php echo CountMessage(); ?>)</strong></a><?php
+				  		}
+				  		?>
 				  	</li>
 				</ul>
 				<h3>Välkommen</h3>
