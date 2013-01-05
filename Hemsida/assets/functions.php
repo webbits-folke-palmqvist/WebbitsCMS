@@ -178,8 +178,8 @@ function GetPages(){
 		?>
 		<td><?php echo $row['id']; ?></td>
 		<td><?php echo $row['name']; ?></td>
-		<td style="width:1px;"><a class="btn" href="#">Ändra</a></td>
-		<td style="width:90px;"><a class="btn" href="#">Ta bort</a></td>
+		<td><a class="btn" href="#">Ändra</a></td>
+		<td><a class="btn" href="#">Ta bort</a></td>
 		<?php
 	}
 }
