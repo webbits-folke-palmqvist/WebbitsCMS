@@ -116,47 +116,6 @@ function secure($unsafe){
 	return $safe;
 }
 
-function cat_name($id) {
-	$result = mysql_query("SELECT name FROM category WHERE id = '$id' LIMIT 1");
-	$row = mysql_fetch_row($result);
-
-	return $row[0];
-}
-
-function my_cat($cat_id){
-	$user_id = user_id($_SESSION['user']);
-
-	$result = mysql_query("SELECT * FROM category WHERE deleted = '0' AND user_id = '$user_id' AND id = '$cat_id' LIMIT 1");
-	$num_rows = mysql_num_rows($result);
-
-	if($num_rows == 0){
-		header('location: ?page=Start');
-	}
-}
-
-function my_doc($doc_id){
-	$user_id = user_id($_SESSION['user']);
-
-	$result = mysql_query("SELECT * FROM document WHERE deleted = '0' AND user_id = '$user_id' AND id = '$doc_id' LIMIT 1");
-	$num_rows = mysql_num_rows($result);
-
-	if($num_rows == 0){
-		header('location: ?page=Start');
-	}
-}
-
-function random_code(){
-	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";	
-	$length = 32;
-
-	$size = strlen( $chars );
-	for( $i = 0; $i < $length; $i++ ) {
-		$str .= $chars[ rand( 0, $size - 1 ) ];
-	}
-
-	return $str;
-}
-
 function update_log($content){
 	$user_id = user_id($_SESSION['user']);
 	$contant = secure($content);
@@ -189,34 +148,5 @@ function daten($timestamp){
 	}
 
 	return $date;
-}
-
-function timen($timestamp){
-	$get = date("d-m-y", $timestamp);
-	$now = date("d-m-y", time());
-	$yesterday = date("d-m-y", (time() - (60 * 60 * 24)));
-
-	if($get == $now){
-		$date = "Idag";
-	} elseif ($date == $yesterday) {
-		$date = "Ig&aring;r";
-	} else {
-		$date = $date_get;
-	}
-}
-
-function GetSetting($id){
-	$result = mysql_query("SELECT onoroff FROM settings WHERE id = '$id' LIMIT 1");
-	$row = mysql_fetch_row($result);
-
-	return $row[0];
-}
-
-function SiteDown(){
-	if(GetSetting(1) == 1){
-		if(rank() != 9){
-			header('location: ?page=Sidan-nere');	
-		}
-	}
 }
 ?>
