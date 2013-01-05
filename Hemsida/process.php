@@ -19,20 +19,20 @@ if($action == "login"){
 		
 		if($count == 1){
 			$_SESSION['user'] = strtolower($user);
-			header('location: ?page=Start');
+			header('location: admin/?page=Start');
 		} else {
 			set_error("* Denna användare är bannad eller raderad.");
-			header('location: ?page=Logga-in');
+			header('location: admin/logga-in.php');
 		}
 	} else {
 		set_error("* Fel användarnamn eller lösenord.");
-		header('location: ?page=Logga-in');
+		header('location: admin/logga-in.php');
 	}
 }
 
 if($action == "logout"){
 	session_destroy();
-	header('location: ?page=Logga-in');
+	header('location: admin/logga-in.php');
 }
 
 if($action == "register"){

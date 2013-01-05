@@ -1,5 +1,25 @@
 <?php
 require('../assets/functions.php');
+include('../assets/database.php');
+
+CheckLogin();
+
+$page = secure(@$_GET['page']);
+
+switch ($page) {
+	case '':
+		$show_page = "start";
+		break;
+	case 'Start':
+		$show_page = "start";
+		break;
+	case 'Pages':
+		$show_page = "pages";
+		break;
+	default:
+		$show_page = "404";
+		break;
+}
 ?>
 <html>
 	<head>
@@ -12,8 +32,8 @@ require('../assets/functions.php');
 		<div class="container">
 			<div class="hero-unit">
 				<ul class="breadcrumb">
-				  	<li><a class="btn" href="index.php">Start</a></li>
-				  	<li><a class="btn" href="#">Alla sidor</a></li>
+				  	<li><a class="btn" href="?page=Start">Start</a></li>
+				  	<li><a class="btn" href="?page=Pages">Alla sidor</a></li>
 				  	<li><a class="btn" href="#">Alla användare</a></li>
 				  	<li class="pull-right">
 				  		<?php
@@ -23,10 +43,12 @@ require('../assets/functions.php');
 				  			?><a class="btn" href="#"><strong>Meddelanden (<?php echo CountMessage(); ?>)</strong></a><?php
 				  		}
 				  		?>
+				  		<a class="btn" href="../process.php?action=logout">Logga ut</a>
 				  	</li>
 				</ul>
-				<h3>Välkommen</h3>
-				<p>Detta är ett CMS byggt utav <a target="_Blank" href="http://webbits.nu/">Webbits</a></p>
+				<?php
+				include($show_page.'.php');
+				?>
 			</div>
 		</div>
 	</body>

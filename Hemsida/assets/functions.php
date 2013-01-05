@@ -32,12 +32,6 @@ function unset_success() {
 	unset($_SESSION['success']);
 }
 
-function login(){
-	if(!$_SESSION['user'] OR $_SESSION['user'] == "") {
-		header('location: ?page=Logga-in');
-	}
-}
-
 function rank(){
 	$session = $_SESSION['user'];
 
@@ -177,6 +171,19 @@ function GetMenu(){
 	}
 }
 
+function GetPages(){
+	$result = mysql_query("SELECT * FROM pages WHERE deleted = '0' AND name != '404'");
+
+	while($row = mysql_fetch_array($result)){
+		?>
+		<td><?php echo $row['id']; ?></td>
+		<td><?php echo $row['name']; ?></td>
+		<td style="width:1px;"><a class="btn" href="#">Ändra</a></td>
+		<td style="width:90px;"><a class="btn" href="#">Ta bort</a></td>
+		<?php
+	}
+}
+
 function CheckPage($page) {
 	$result = mysql_query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'");
 	$num_rows = mysql_num_rows($result);
@@ -185,6 +192,12 @@ function CheckPage($page) {
 		return 0;
 	} else {
 		return $num_rows;
+	}
+}
+
+function CheckLogin() {
+	if(!$_SESSION['user'] OR $_SESSION['user'] == "") {
+		header('location: logga-in.php');
 	}
 }
 ?>
