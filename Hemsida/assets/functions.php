@@ -149,4 +149,19 @@ function daten($timestamp){
 
 	return $date;
 }
+
+function GetContent($page){
+	$page = secure($page);
+
+	if(empty($page)){
+		$name = "hem";
+	} else {
+		$name = $page;
+	}
+
+	$result = mysql_query("SELECT content FROM pages WHERE name = 'hem' LIMIT 1");
+	$row = mysql_fetch_row($result);
+
+	echo $row[0];
+}
 ?>

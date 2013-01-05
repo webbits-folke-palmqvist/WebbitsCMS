@@ -1,8 +1,5 @@
 <?php
 require('assets/functions.php');
-require('assets/database.php');
-
-session_start();
 
 $action = secure($_GET['action']);
 

@@ -1,3 +1,5 @@
 <?php
-$page = @$_GET['page'];
+require('assets/functions.php');
+
+GetContent(@$_GET['page']);
 ?>
