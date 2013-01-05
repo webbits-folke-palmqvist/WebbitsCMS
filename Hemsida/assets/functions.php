@@ -81,8 +81,8 @@ function count_rows_log_return($table) {
 	}
 }
 
-function count_rows_user($table, $user_id) {
-	$result = mysql_query("SELECT * FROM ".$table." WHERE user_id = '$user_id' AND deleted = '0'");
+function CountMessage() {
+	$result = mysql_query("SELECT * FROM message WHERE deleted = '0' AND viewed = '0'");
 	$num_rows = mysql_num_rows($result);
 
 	if($num_rows < 1){
@@ -155,13 +155,36 @@ function GetContent($page){
 
 	if(empty($page)){
 		$name = "hem";
+	} elseif (CheckPage($page) == 0) {
+		$name = "404";
 	} else {
 		$name = $page;
 	}
 
-	$result = mysql_query("SELECT content FROM pages WHERE name = 'hem' LIMIT 1");
+	$result = mysql_query("SELECT content FROM pages WHERE name = '$name' AND deleted = '0' LIMIT 1");
 	$row = mysql_fetch_row($result);
 
 	echo $row[0];
+}
+
+function GetMenu(){
+	$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
+
+	while($row = mysql_fetch_array($result)){
+		?>
+		<a href="?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
+		<?php
+	}
+}
+
+function CheckPage($page) {
+	$result = mysql_query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'");
+	$num_rows = mysql_num_rows($result);
+
+	if($num_rows != 1){
+		return 0;
+	} else {
+		return $num_rows;
+	}
 }
 ?>
