@@ -1,0 +1,14 @@
+body {
+	background-image: url('../img/background.png');
+}
+
+.container {
+	margin-top: 25px;
+	background-color: #EEEEEE;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.hero-unit {
+	padding: 40px;
+}
