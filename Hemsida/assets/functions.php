@@ -129,16 +129,16 @@ function update_log($content){
 }
 
 function daten($timestamp){
-	$get = date("d-m-y", $timestamp);
-	$now = date("d-m-y", time());
-	$yesterday = date("d-m-y", (time() - (60 * 60 * 24)));
+	$get = date("d/m/y", $timestamp);
+	$now = date("d/m/y", time());
+	$yesterday = date("d/m/y", (time() - (60 * 60 * 24)));
 
 	if($get == $now){
-		$date = "Idag";
+		$date = "Idag - ".date("H:i:s", $timestamp);
 	} elseif ($get == $yesterday) {
-		$date = "Ig&aring;r";
+		$date = "Ig&aring;r".date("H:i:s", $timestamp);
 	} else {
-		$date = $get;
+		$date = $get." - ".date("H:i:s", $timestamp);
 	}
 
 	return $date;
@@ -167,50 +167,6 @@ function GetMenu(){
 	while($row = mysql_fetch_array($result)){
 		?>
 		<a href="?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
-		<?php
-	}
-}
-
-function GetPages(){
-	$result = mysql_query("SELECT * FROM pages WHERE deleted = '0'");
-
-	while($row = mysql_fetch_array($result)){
-		?>
-		<tr>
-		<td><?php echo $row['id']; ?></td>
-		<td><a href="#"><?php echo $row['name']; ?></a></td>
-		<td><a class="btn" href="#">Ändra</a></td>
-		<?php
-		if($row['name'] != "Hem" OR $row['name'] != "404"){
-			?>
-			<td><a class="btn" href="#">Ta bort</a></td>
-			<?php
-		}
-		?>
-		</tr>
-		<?php
-	}
-}
-
-function GetMessage(){
-	$result = mysql_query("SELECT * FROM message WHERE deleted = '0'");
-
-	while($row = mysql_fetch_array($result)){
-		if($row['viewed'] == 0){
-			?>
-			<td><strong>Nytt!</strong></td>
-			<?php
-		} else {
-			?>
-			<td>Läst</td>
-			<?php
-		}
-		?>
-		<td><?php echo $row['from_name']; ?></td>
-		<td><?php echo $row['from_email']; ?></td>
-		<td><a class="btn" href="#">Läs</a></td>
-		<td><a class="btn" href="#">Ta bort</a></td>
-		</tr>
 		<?php
 	}
 }
