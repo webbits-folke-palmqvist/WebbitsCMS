@@ -96,18 +96,18 @@ if($action == "pages"){
 	$do = secure($_GET['do']);
 
 	if($do == "add"){
-		$title = secure($_POST['title']);
+		$name = secure($_POST['name']);
 		$content = secure($_POST['content']);
 
-		if(empty($title) OR empty($content)){
+		if(empty($name) OR empty($content)){
 			set_error("* Fyll i alla fält");
 			header('location: admin/?page=Pages&sub=add');
 		} else {
 			$time = time();
 
-			$title = preg_replace('/\s/', '-', $title);
+			$name = preg_replace('/\s/', '-', $name);
 
-			$sql = "INSERT INTO pages(name, content, datetime)VALUES('$title', '$content', '$time')";
+			$sql = "INSERT INTO pages(name, content, datetime)VALUES('$name', '$content', '$time')";
 			$add = mysql_query($sql);
 
 			if($add){
@@ -118,23 +118,23 @@ if($action == "pages"){
 	}
 
 	if($do == "edit"){
-		$title = secure($_POST['title']);
+		$name = secure($_POST['name']);
 		$content = secure($_POST['content']);
 		$id = secure($_POST['id']);
 
-		if(empty($title) OR empty($content) OR empty($id)){
+		if(empty($name) OR empty($content) OR empty($id)){
 			header('location: admin/?page=Pages');
 		} else {
 			$time = time();
 
-			$title = preg_replace('/\s/', '-', $title);
+			$name = preg_replace('/\s/', '-', $name);
 
-			$sql = "UPDATE pages SET title = '$title' AND content = '$content' AND datetime = '$time' WHERE id = '$id' LIMIT 1";
+			$sql = "UPDATE pages SET name = '$name', content = '$content', datetime = '$time' WHERE id = '$id' LIMIT 1";
 			$update = mysql_query($sql);
 
 			if($update){
-				set_success("Meddelandet är nu borttaget.");
-				header('location: admin/?page=Message');
+				set_success("Ändringarna är nu sparade.");
+				header('location: admin/?page=Pages');
 			}
 		}
 	}

@@ -40,7 +40,7 @@ if(!$sub){
 		<div class="pages-add">
 			<form action="../process.php?action=pages&do=add" method="POST">
 				<?php error(); ?>
-				<input class="input-fill" type="text" name="title" placeholder="Titel"><br />
+				<input class="input-fill" type="text" name="name" placeholder="Namn"><br />
 				<textarea name="content"></textarea>
 				<script language="javascript" type="text/javascript" src="../assets/tiny_mce/tiny_mce.js"></script>
 			    <script language="javascript" type="text/javascript">
@@ -68,7 +68,7 @@ if(!$sub){
 				<div class="pages-add">
 					<form action="../process.php?action=pages&do=edit" method="POST">
 						<?php error(); ?>
-						<input class="input-fill" type="text" name="title" placeholder="Titel" value="<?php echo $row['name'] ?>"><br />
+						<input class="input-fill" type="text" name="name" placeholder="Namn" value="<?php echo $row['name'] ?>"><br />
 						<textarea name="content"><?php echo $row['content'] ?></textarea>
 						<input type="hidden" name="id" id="id" value="<?php echo $row['id'] ?>">
 						<script language="javascript" type="text/javascript" src="../assets/tiny_mce/tiny_mce.js"></script>
