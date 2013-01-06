@@ -159,6 +159,27 @@ function GetContent($page){
 	$row = mysql_fetch_row($result);
 
 	echo $row[0];
+
+	if($name == "Kontakt"){
+		success();
+		error();
+		?>
+			<form action="process.php?action=kontakt" method="POST">
+			<input class="input-fill" type="text" name="from_name" placeholder="Namn"><br />
+			<input class="input-fill" type="text" name="from_email" placeholder="Email"><br />
+			<textarea name="content"></textarea>
+			<script language="javascript" type="text/javascript" src="assets/tiny_mce/tiny_mce.js"></script>
+		    <script language="javascript" type="text/javascript">
+		    tinyMCE.init({
+		            theme : "advanced",
+		            mode : "textareas",
+		            theme_advanced_toolbar_location : "top"
+		    });
+		    </script>
+		    <input class="btn btn-success" type="submit" value="Skicka meddelande">
+		</form>
+		<?php
+	}
 }
 
 function GetMenu(){
