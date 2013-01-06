@@ -16,6 +16,9 @@ switch ($page) {
 	case 'Pages':
 		$show_page = "pages";
 		break;
+	case 'Message':
+		$show_page = "message";
+		break;
 	default:
 		$show_page = "404";
 		break;
@@ -38,9 +41,9 @@ switch ($page) {
 				  	<li class="pull-right">
 				  		<?php
 				  		if(CountMessage() == 0){
-				  			?><a class="btn" href="#">Meddelanden (<?php echo CountMessage(); ?>)</a><?php
+				  			?><a class="btn" href="?page=Message">Meddelanden (<?php echo CountMessage(); ?>)</a><?php
 				  		} else {
-				  			?><a class="btn" href="#"><strong>Meddelanden (<?php echo CountMessage(); ?>)</strong></a><?php
+				  			?><a class="btn" href="?page=Message"><strong>Meddelanden (<?php echo CountMessage(); ?>)</strong></a><?php
 				  		}
 				  		?>
 				  		<a class="btn" href="../process.php?action=logout">Logga ut</a>
