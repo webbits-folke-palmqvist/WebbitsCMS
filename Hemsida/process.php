@@ -68,4 +68,23 @@ if($action == "register"){
 		}
 	}
 }
+
+if($action == "message"){
+	$do = secure($_GET['do']);
+
+	if($do == "delete"){
+		$id = secure($_GET['id']);
+		if(!$id){
+			header('location: admin');
+		} else {
+			$sql = "UPDATE message SET deleted = 1 WHERE id = '$id' LIMIT 1";
+			$update = mysql_query($sql);
+
+			if($update){
+				set_success("Meddelandet är nu borttaget.");
+				header('location: admin/?page=Message');
+			}
+		}
+	}
+}
 ?>
