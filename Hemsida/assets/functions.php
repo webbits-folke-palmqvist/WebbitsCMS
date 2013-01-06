@@ -1,6 +1,6 @@
 <?php
 @session_start();
-include('assets/database.php');
+include('database.php');
 
 function error() {
 	if($_SESSION['error']){
@@ -189,7 +189,7 @@ function GetMenu(){
 	while($row = mysql_fetch_array($result)){
 
 		?>
-		<a href="?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
+		<a class="btn btn-block" href="?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
 		<?php
 	}
 }
