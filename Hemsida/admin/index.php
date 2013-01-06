@@ -54,5 +54,7 @@ switch ($page) {
 				?>
 			</div>
 		</div>
+		<br>
+		<center><a class="btn" target="_Blank" href="http://webbits.nu/">Made by Webbits</a></center>
 	</body>
 </html>
