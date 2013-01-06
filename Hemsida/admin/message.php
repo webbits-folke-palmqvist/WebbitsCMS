@@ -27,7 +27,7 @@ if(!$sub){
 			?>
 			<td><?php echo $row['from_name']; ?></td>
 			<td><?php echo $row['from_email']; ?></td>
-			<td><a class="btn" href="?page=Message&sub=Read">Läs</a></td>
+			<td><a class="btn" href="?page=Message&sub=Read&id=<?php echo $row['id']; ?>">Läs</a></td>
 			<td><a class="btn" href="#">Ta bort</a></td>
 			</tr>
 			<?php
@@ -38,6 +38,10 @@ if(!$sub){
 } else {
 	if($sub == "Read"){
 		$id = secure($_GET['id']);
+
+		$sql = "UPDATE message SET viewed = 1 WHERE id = '$id' LIMIT 1";
+		$update = mysql_query($sql);
+
 		$result = mysql_query("SELECT * FROM message WHERE id = '$id' AND deleted = '0' LIMIT 1");
 		$row = mysql_fetch_row($result);
 		?>
@@ -49,7 +53,6 @@ if(!$sub){
 		<hr>
 		<?php echo $row[3]; ?>
 		<?php
-		echo time();
 	}
 }
 ?>
