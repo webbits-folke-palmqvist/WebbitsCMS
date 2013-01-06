@@ -22,5 +22,6 @@ if($_SESSION['user'] != ""){
 			<hr>
 			<center><a class="btn" href="../">Tillbaka till sidan</a></center>
 		</form>
+		<center><a class="btn" target="_Blank" href="http://webbits.nu/">Made by Webbits</a></center>
 	</body>
 </html>
