@@ -45,3 +45,8 @@ body {
 .input-fill {
 	width: 100%;
 }
+
+.pages-add textarea {
+	width: 100%;
+	height: 350px;
+}
