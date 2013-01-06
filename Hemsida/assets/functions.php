@@ -164,7 +164,7 @@ function GetContent($page){
 		success();
 		error();
 		?>
-			<form action="process.php?action=kontakt" method="POST">
+		<form action="process.php?action=kontakt" method="POST">
 			<input class="input-fill" type="text" name="from_name" placeholder="Namn"><br />
 			<input class="input-fill" type="text" name="from_email" placeholder="Email"><br />
 			<textarea name="content"></textarea>
@@ -176,6 +176,7 @@ function GetContent($page){
 		            theme_advanced_toolbar_location : "top"
 		    });
 		    </script>
+		    <br>
 		    <input class="btn btn-success" type="submit" value="Skicka meddelande">
 		</form>
 		<?php
