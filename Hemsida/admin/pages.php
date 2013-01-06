@@ -21,7 +21,7 @@ if(!$sub){
 			<td><a target="_Blank" href="../?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a></td>
 			<td><a class="btn" href="?page=Pages&sub=edit&id=<?php echo $row['id']; ?>">Ändra</a></td>
 			<?php
-			if($row['name'] == "Hem" OR $row['name'] == "404"){
+			if($row['name'] == "Hem" OR $row['name'] == "404" OR $row['name'] == "Kontakt"){
 			} else {
 				?>
 				<td><a class="btn" href="../process.php?action=pages&do=delete&id=<?php echo $row['id']; ?>">Ta bort</a></td>
