@@ -154,4 +154,24 @@ if($action == "pages"){
 		}
 	}
 }
+
+if($action == "kontakt"){
+	$from_name = secure($_POST['from_name']);
+	$from_email = secure($_POST['from_email']);
+	$content = secure($_POST['content']);
+	$datetime = time();
+
+	if(empty($from_email) OR empty($from_name) OR empty($content)){
+		set_error("* Fyll i alla fält.");
+		header('location: index.php?page=Kontakt');
+	} else {
+		$sql = "INSERT INTO message(from_name, from_email, content, datetime)VALUES('$from_name', '$from_email', '$content', '$datetime')";
+		$add = mysql_query($sql);
+
+		if($add){
+			set_success("Ditt meddelande skickades");
+			header('location: index.php?page=Kontakt');
+		}
+	}
+}
 ?>
