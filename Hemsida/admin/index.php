@@ -37,7 +37,7 @@ switch ($page) {
 				<ul class="breadcrumb">
 				  	<li><a class="btn" href="?page=Start">Start</a></li>
 				  	<li><a class="btn" href="?page=Pages">Alla sidor</a></li>
-				  	<li><a class="btn" href="#">Alla användare</a></li>
+				  	<!--<li><a class="btn" href="#">Alla användare</a></li>-->
 				  	<li class="pull-right">
 				  		<?php
 				  		if(CountMessage() == 0){
