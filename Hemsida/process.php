@@ -3,6 +3,10 @@ require('assets/functions.php');
 
 $action = secure($_GET['action']);
 
+if(!$action){
+	header('location: index.php?page=Hem');
+}
+
 if($action == "login"){
 	$user = secure($_POST['username']);
 	$pass = md5(secure($_POST['password']));
@@ -83,6 +87,69 @@ if($action == "message"){
 			if($update){
 				set_success("Meddelandet är nu borttaget.");
 				header('location: admin/?page=Message');
+			}
+		}
+	}
+}
+
+if($action == "pages"){
+	$do = secure($_GET['do']);
+
+	if($do == "add"){
+		$title = secure($_POST['title']);
+		$content = secure($_POST['content']);
+
+		if(empty($title) OR empty($content)){
+			set_error("* Fyll i alla fält");
+			header('location: admin/?page=Pages&sub=add');
+		} else {
+			$time = time();
+
+			$title = preg_replace('/\s/', '-', $title);
+
+			$sql = "INSERT INTO pages(name, content, datetime)VALUES('$title', '$content', '$time')";
+			$add = mysql_query($sql);
+
+			if($add){
+				set_success("Sidan har lagts till");
+				header('location: admin/?page=Pages');
+			}
+		}
+	}
+
+	if($do == "edit"){
+		$title = secure($_POST['title']);
+		$content = secure($_POST['content']);
+		$id = secure($_POST['id']);
+
+		if(empty($title) OR empty($content) OR empty($id)){
+			header('location: admin/?page=Pages');
+		} else {
+			$time = time();
+
+			$title = preg_replace('/\s/', '-', $title);
+
+			$sql = "UPDATE pages SET title = '$title' AND content = '$content' AND datetime = '$time' WHERE id = '$id' LIMIT 1";
+			$update = mysql_query($sql);
+
+			if($update){
+				set_success("Meddelandet är nu borttaget.");
+				header('location: admin/?page=Message');
+			}
+		}
+	}
+
+	if($do == "delete"){
+		$id = secure($_GET['id']);
+		if(!$id){
+			header('location: admin');
+		} else {
+			$sql = "UPDATE pages SET deleted = 1 WHERE id = '$id' LIMIT 1";
+			$update = mysql_query($sql);
+
+			if($update){
+				set_success("Sidan är nu borttaget.");
+				header('location: admin/?page=Pages');
 			}
 		}
 	}
