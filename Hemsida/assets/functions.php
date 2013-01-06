@@ -177,10 +177,14 @@ function GetPages(){
 	while($row = mysql_fetch_array($result)){
 		?>
 		<td><?php echo $row['id']; ?></td>
-		<td><?php echo $row['name']; ?></td>
+		<td><a href="#"><?php echo $row['name']; ?></a></td>
 		<td><a class="btn" href="#">Ändra</a></td>
-		<td><a class="btn" href="#">Ta bort</a></td>
 		<?php
+		if($row['name'] != "hem"){
+			?>
+			<td><a class="btn" href="#">Ta bort</a></td>
+			<?php
+		}
 	}
 }
 
