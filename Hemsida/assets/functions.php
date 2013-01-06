@@ -172,19 +172,46 @@ function GetMenu(){
 }
 
 function GetPages(){
-	$result = mysql_query("SELECT * FROM pages WHERE deleted = '0' AND name != '404'");
+	$result = mysql_query("SELECT * FROM pages WHERE deleted = '0'");
 
 	while($row = mysql_fetch_array($result)){
 		?>
+		<tr>
 		<td><?php echo $row['id']; ?></td>
 		<td><a href="#"><?php echo $row['name']; ?></a></td>
 		<td><a class="btn" href="#">Ändra</a></td>
 		<?php
-		if($row['name'] != "hem"){
+		if($row['name'] != "Hem" OR $row['name'] != "404"){
 			?>
 			<td><a class="btn" href="#">Ta bort</a></td>
 			<?php
 		}
+		?>
+		</tr>
+		<?php
+	}
+}
+
+function GetMessage(){
+	$result = mysql_query("SELECT * FROM message WHERE deleted = '0'");
+
+	while($row = mysql_fetch_array($result)){
+		if($row['viewed'] == 0){
+			?>
+			<td><strong>Nytt!</strong></td>
+			<?php
+		} else {
+			?>
+			<td>Läst</td>
+			<?php
+		}
+		?>
+		<td><?php echo $row['from_name']; ?></td>
+		<td><?php echo $row['from_email']; ?></td>
+		<td><a class="btn" href="#">Läs</a></td>
+		<td><a class="btn" href="#">Ta bort</a></td>
+		</tr>
+		<?php
 	}
 }
 
