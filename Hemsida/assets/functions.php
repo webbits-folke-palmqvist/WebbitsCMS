@@ -165,6 +165,7 @@ function GetMenu(){
 	$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
 
 	while($row = mysql_fetch_array($result)){
+
 		?>
 		<a href="?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
 		<?php
