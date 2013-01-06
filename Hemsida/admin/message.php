@@ -14,7 +14,7 @@ if(!$sub){
 			<td style="width:11%;"><strong>Ta bort</strong></td>
 		</tr>
 		<?php
-		$result = mysql_query("SELECT * FROM message WHERE deleted = '0' ORDER BY id");
+		$result = mysql_query("SELECT * FROM message WHERE deleted = '0' ORDER BY id DESC");
 
 		while($row = mysql_fetch_array($result)){
 			if($row['viewed'] == 0){
