@@ -2,6 +2,8 @@
 $sub = @$_GET['sub'];
 
 if(!$sub){
+
+	success();
 	?>
 	<table class="table table-hover">
 		<tr>
@@ -12,7 +14,7 @@ if(!$sub){
 			<td style="width:11%;"><strong>Ta bort</strong></td>
 		</tr>
 		<?php
-		$result = mysql_query("SELECT * FROM message WHERE deleted = '0'");
+		$result = mysql_query("SELECT * FROM message WHERE deleted = '0' ORDER BY id");
 
 		while($row = mysql_fetch_array($result)){
 			if($row['viewed'] == 0){
@@ -28,7 +30,7 @@ if(!$sub){
 			<td><?php echo $row['from_name']; ?></td>
 			<td><?php echo $row['from_email']; ?></td>
 			<td><a class="btn" href="?page=Message&sub=Read&id=<?php echo $row['id']; ?>">Läs</a></td>
-			<td><a class="btn" href="#">Ta bort</a></td>
+			<td><a class="btn" href="../process.php?action=message&do=delete&id=<?php echo $row['id']; ?>">Ta bort</a></td>
 			</tr>
 			<?php
 		}
