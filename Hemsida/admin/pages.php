@@ -23,7 +23,7 @@ if(!$sub){
 			<td><a target="_Blank" href="../?page=<?php echo $row['name']; ?>"><?php echo $name; ?></a></td>
 			<td><a class="btn" href="?page=Pages&sub=edit&id=<?php echo $row['id']; ?>">Ändra</a></td>
 			<?php
-			if($row['id'] == 1 OR $row['id'] == 2 OR $row['name'] == "Kontakt"){
+			if($row['id'] == 1 OR $row['id'] == 2 OR $row['id'] == 3){
 			} else {
 				?>
 				<td><a class="btn" href="../process.php?action=pages&do=delete&id=<?php echo $row['id']; ?>">Ta bort</a></td>
