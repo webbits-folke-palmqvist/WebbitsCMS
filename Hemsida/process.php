@@ -106,6 +106,9 @@ if($action == "pages"){
 			$time = time();
 
 			$name = preg_replace('/\s/', '-', $name);
+			$byt = array ( "Ã…", "Ã„", "Ã–", "Ã¥", "Ã¤", "Ã¶" );
+			$med = array ( "Å", "Ä", "Ö", "å", "ä", "ö" );
+			$name = str_replace($byt,$med,$name);
 
 			$sql = "INSERT INTO pages(name, content, datetime)VALUES('$name', '$content', '$time')";
 			$add = mysql_query($sql);
