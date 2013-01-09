@@ -171,7 +171,7 @@ function GetContent($page){
 			<script language="javascript" type="text/javascript" src="assets/tiny_mce/tiny_mce.js"></script>
 		    <script language="javascript" type="text/javascript">
 		    tinyMCE.init({
-		            theme : "advanced",
+		            theme : "simple",
 		            mode : "textareas",
 		            theme_advanced_toolbar_location : "top"
 		    });
