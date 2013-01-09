@@ -187,9 +187,10 @@ function GetMenu(){
 	$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
 
 	while($row = mysql_fetch_array($result)){
-
+		$name = $row['name'];
+		$name = str_replace("-"," ", $name);
 		?>
-		<a class="btn btn-block" href="?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a>
+		<a class="btn btn-block" href="?page=<?php echo $row['name']; ?>"><?php echo $name; ?></a>
 		<?php
 	}
 }

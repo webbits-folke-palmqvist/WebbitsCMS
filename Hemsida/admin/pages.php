@@ -16,9 +16,11 @@ if(!$sub){
 		$result = mysql_query("SELECT * FROM pages WHERE deleted = '0' ORDER BY name");
 
 		while($row = mysql_fetch_array($result)){
+			$name = $row['name'];
+			$name = str_replace("-"," ", $name);
 			?>
 			<tr>
-			<td><a target="_Blank" href="../?page=<?php echo $row['name']; ?>"><?php echo $row['name']; ?></a></td>
+			<td><a target="_Blank" href="../?page=<?php echo $row['name']; ?>"><?php echo $name; ?></a></td>
 			<td><a class="btn" href="?page=Pages&sub=edit&id=<?php echo $row['id']; ?>">Ändra</a></td>
 			<?php
 			if($row['name'] == "Hem" OR $row['name'] == "404" OR $row['name'] == "Kontakt"){
