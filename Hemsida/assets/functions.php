@@ -195,6 +195,13 @@ function GetMenu(){
 	}
 }
 
+function GetContactName($id){
+	$result = mysql_query("SELECT name FROM pages WHERE id = '$id' AND deleted = '0' LIMIT 1");
+	$row = mysql_fetch_row($result);
+
+	return $row[0];
+}
+
 function CheckPage($page) {
 	$result = mysql_query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'");
 	$num_rows = mysql_num_rows($result);
