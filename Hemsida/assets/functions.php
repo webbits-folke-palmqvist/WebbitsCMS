@@ -155,12 +155,12 @@ function GetContent($page){
 		$name = $page;
 	}
 
-	$result = mysql_query("SELECT content FROM pages WHERE name = '$name' AND deleted = '0' LIMIT 1");
+	$result = mysql_query("SELECT content,id FROM pages WHERE name = '$name' AND deleted = '0' LIMIT 1");
 	$row = mysql_fetch_row($result);
 
 	echo $row[0];
 
-	if($name == "Kontakt"){
+	if($row[1] == 3){
 		success();
 		error();
 		?>
