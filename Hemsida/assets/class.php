@@ -43,8 +43,8 @@ class Get {
 		echo $row[0];
 
 		if($row[1] == 3){
-			success();
-			error();
+			$Success->show();
+			$Error->show();
 			?>
 			<form action="process.php?action=kontakt" method="POST">
 				<input class="input-fill" type="text" name="from_name" placeholder="Namn"><br />
@@ -116,7 +116,7 @@ class User {
 }
 
 class Count {
-	function Message() {
+	function message() {
 		$result = mysql_query("SELECT id FROM message WHERE deleted = '0' AND viewed = '0'");
 		$num_rows = mysql_num_rows($result);
 
