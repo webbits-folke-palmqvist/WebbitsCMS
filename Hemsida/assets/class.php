@@ -6,16 +6,12 @@ class Error {
 	function show() {
 		if($_SESSION['error']){
 			echo '<div class="alert alert-error">'.@$_SESSION['error'].'</div>';
-			$Error->unset();
+			unset($_SESSION['error']);
 		}
 	}
 
 	function set($error) {
 		$_SESSION['error'] = $error;
-	}
-
-	function unset() {
-		unset($_SESSION['error']);
 	}
 }
 
@@ -23,16 +19,12 @@ class Success {
 	function show() {
 		if($_SESSION['success']){
 			echo '<div class="alert alert-success">'.@$_SESSION['success'].'</div>';
-			$Success->unset();
+			unset($_SESSION['success']);
 		}
 	}
 
 	function set($success) {
 		$_SESSION['success'] = $success;
-	}
-
-	function unset() {
-		unset($_SESSION['success']);
 	}
 }
 
@@ -42,7 +34,7 @@ class Get {
 
 		if(empty($page)){
 			$name = "hem";
-		} elseif (CheckPage($page) == 0) {
+		} elseif (Checkpage($page) == 0) {
 			$name = "404";
 		} else {
 			$name = $page;
@@ -138,23 +130,12 @@ class Count {
 		}
 	}
 
-	function echo($sql) {
+	function write($sql) {
 		$result = mysql_query($sql);
 		$num_rows = mysql_num_rows($result);
 
 		if($num_rows < 1){
-			echo "0";
-		} else {
-			echo $num_rows;
-		}
-	}
-
-	function return($sql) {
-		$result = mysql_query($sql);
-		$num_rows = mysql_num_rows($result);
-
-		if($num_rows < 1){
-			return 0;
+			return "0";
 		} else {
 			return $num_rows;
 		}
@@ -162,17 +143,6 @@ class Count {
 }
 
 class Check {
-	function page($page) {
-		$result = mysql_query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'");
-		$num_rows = mysql_num_rows($result);
-
-		if($num_rows != 1){
-			return 0;
-		} else {
-			return $num_rows;
-		}
-	}
-
 	function login() {
 		if(!$_SESSION['user'] OR $_SESSION['user'] == "") {
 			header('location: logga-in.php');

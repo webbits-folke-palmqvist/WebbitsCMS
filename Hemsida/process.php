@@ -1,5 +1,6 @@
 <?php
 require('assets/functions.php');
+require('assets/class.php');
 
 $action = secure($_GET['action']);
 
@@ -25,11 +26,11 @@ if($action == "login"){
 			$_SESSION['user'] = strtolower($user);
 			header('location: admin/?page=Start');
 		} else {
-			set_error("* Denna användare är bannad eller raderad.");
+			$Error->set("* Denna användare är bannad eller raderad.");
 			header('location: admin/logga-in.php');
 		}
 	} else {
-		set_error("* Fel användarnamn eller lösenord.");
+		$Error->set("* Fel användarnamn eller lösenord.");
 		header('location: admin/logga-in.php');
 	}
 }
@@ -45,7 +46,7 @@ if($action == "register"){
 	$pass2 = secure($_POST['password2']);
 
 	if(!$pass OR !$pass2 OR !$user){
-		set_error("* Fyll i alla fälten.");
+		$Error->set("* Fyll i alla fälten.");
 		header('location: ?page=Registrera');
 	} else {
 		if($pass == $pass2){
@@ -55,19 +56,19 @@ if($action == "register"){
 			$pass = md5($pass);
 
 			if($count == 1){
-				set_error("* Användarnamn används redan.");
+				$Error->set("* Användarnamn används redan.");
 				header('location: ?page=Registrera');	
 			} else {
 				$sql = "INSERT INTO users(username, password, rank)VALUES('$user', '$pass', '1')";
 				$add = mysql_query($sql);
 
 				if($add){
-					set_success("Grattis, du är nu registrerad!");
+					$Success->set("Grattis, du är nu registrerad!");
 					header('location: ?page=Lyckat');
 				}
 			}
 		} else {
-			set_error("* Lösenorden måste matcha.");
+			$Error->set("* Lösenorden måste matcha.");
 			header('location: ?page=Registrera');
 		}
 	}
@@ -85,7 +86,7 @@ if($action == "message"){
 			$update = mysql_query($sql);
 
 			if($update){
-				set_success("Meddelandet är nu borttaget.");
+				$Success->set("Meddelandet är nu borttaget.");
 				header('location: admin/?page=Message');
 			}
 		}
@@ -100,7 +101,7 @@ if($action == "pages"){
 		$content = secure($_POST['content']);
 
 		if(empty($name) OR empty($content)){
-			set_error("* Fyll i alla fält");
+			$Error->set("* Fyll i alla fält");
 			header('location: admin/?page=Pages&sub=add');
 		} else {
 			$time = time();
@@ -114,7 +115,7 @@ if($action == "pages"){
 			$add = mysql_query($sql);
 
 			if($add){
-				set_success("Sidan har lagts till");
+				$Success->set("Sidan har lagts till");
 				header('location: admin/?page=Pages');
 			}
 		}
@@ -136,7 +137,7 @@ if($action == "pages"){
 			$update = mysql_query($sql);
 
 			if($update){
-				set_success("Ändringarna är nu sparade.");
+				$Success->set("Ändringarna är nu sparade.");
 				header('location: admin/?page=Pages');
 			}
 		}
@@ -151,7 +152,7 @@ if($action == "pages"){
 			$update = mysql_query($sql);
 
 			if($update){
-				set_success("Sidan är nu borttaget.");
+				$Success->set("Sidan är nu borttaget.");
 				header('location: admin/?page=Pages');
 			}
 		}
@@ -165,14 +166,14 @@ if($action == "kontakt"){
 	$datetime = time();
 
 	if(empty($from_email) OR empty($from_name) OR empty($content)){
-		set_error("* Fyll i alla fält.");
+		$Error->set("* Fyll i alla fält.");
 		header('location: index.php?page='.GetContactName(3));
 	} else {
 		$sql = "INSERT INTO message(from_name, from_email, content, datetime)VALUES('$from_name', '$from_email', '$content', '$datetime')";
 		$add = mysql_query($sql);
 
 		if($add){
-			set_success("Ditt meddelande skickades");
+			$Success->set("Ditt meddelande skickades");
 			header('location: index.php?page='.GetContactName(3));
 		}
 	}

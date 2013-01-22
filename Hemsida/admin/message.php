@@ -3,7 +3,7 @@ $sub = @$_GET['sub'];
 
 if(!$sub){
 
-	success();
+	$Success->show();
 	?>
 	<table class="table table-hover">
 		<tr>

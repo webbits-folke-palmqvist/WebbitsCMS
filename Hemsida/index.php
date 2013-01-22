@@ -1,4 +1,5 @@
 <?php
+require('assets/class.php');
 require('assets/functions.php');
 ?>
 <html>
@@ -7,7 +8,7 @@ require('assets/functions.php');
 		<title>Beta</title>
 	</head>
 	<body>
-		<?php GetMenu(); ?>
-		<?php GetContent(@$_GET['page']); ?>
+		<?php $Get->menu(); ?>
+		<?php $Get->content(@$_GET['page']); ?>
 	</body>
 </html>

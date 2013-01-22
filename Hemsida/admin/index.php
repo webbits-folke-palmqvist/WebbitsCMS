@@ -3,7 +3,7 @@ require('../assets/class.php');
 require('../assets/functions.php');
 include('../assets/database.php');
 
-CheckLogin();
+$Check->login();
 
 $page = secure(@$_GET['page']);
 
@@ -41,8 +41,8 @@ switch ($page) {
 				  	<!--<li><a class="btn" href="#">Alla användare</a></li>-->
 				  	<li class="pull-right">
 				  		<?php
-				  		if(CountMessage() == 0){
-				  			?><a class="btn" href="?page=Message">Meddelanden (<?php echo CountMessage(); ?>)</a><?php
+				  		if($Count->message() == 0){
+				  			?><a class="btn" href="?page=Message">Meddelanden (<?php echo $Count->message(); ?>)</a><?php
 				  		} else {
 				  			?><a class="btn" href="?page=Message"><strong>Meddelanden (<?php echo CountMessage(); ?>)</strong></a><?php
 				  		}
