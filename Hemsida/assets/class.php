@@ -9,7 +9,8 @@ class Database {
 	}
 
 	function query($sql) {
-		return mysql_query($sql);
+		$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
+		return $result;
 	}
 }
 
@@ -45,7 +46,6 @@ class Get {
 		$this->Error = new Error();
 		$this->Success = new Success();
 		$this->Check = new Check();
-		$this->Database = new Database();
 
 		$page = secure($page);
 
@@ -57,8 +57,8 @@ class Get {
 			$name = $page;
 		}
 
-
-		$row = mysql_fetch_row($this->Database->query("SELECT content,id FROM pages WHERE name = '$name' AND deleted = '0' LIMIT 1"));
+		$result = mysql_query("SELECT content,id FROM pages WHERE name = '$name' AND deleted = '0' LIMIT 1");
+		$row = mysql_fetch_row($result);
 
 		echo $row[0];
 
@@ -86,9 +86,8 @@ class Get {
 	}
 
 	function menu() {
-		$this->Database = new Database();
-
-		while($row = mysql_fetch_array($this->Database->query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'"))){
+		$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
+		while($row = mysql_fetch_array($result)){
 			$name = $row['name'];
 			$name = str_replace("-"," ", $name);
 			?>
@@ -98,9 +97,9 @@ class Get {
 	}
 
 	function name($id) {
-		$this->Database = new Database();
+		$result = mysql_query("SELECT name FROM pages WHERE id = '$id' AND deleted = '0' LIMIT 1");
 
-		$row = mysql_fetch_row($this->Database->query("SELECT name FROM pages WHERE id = '$id' AND deleted = '0' LIMIT 1"));
+		$row = mysql_fetch_row($result);
 
 		return $row[0];
 	}
@@ -108,27 +107,26 @@ class Get {
 
 class User {
 	function rank() {
-		$this->Database = new Database();
-
 		$username = $_SESSION['user'];
 
-		$row = mysql_fetch_row($this->Database->query("SELECT rank FROM users WHERE username = '$username'"));
+		$result = mysql_query("SELECT rank FROM users WHERE username = '$username'");
+		$row = mysql_fetch_row();
 
 		return $row[0];
 	}
 
 	function id($username) {
-		$this->Database = new Database();
+		$result = mysql_query("SELECT id FROM users WHERE username = '$username' LIMIT 1");
 
-		$row = mysql_fetch_row($this->Database->query("SELECT id FROM users WHERE username = '$username' LIMIT 1"));
+		$row = mysql_fetch_row();
 
 		return $row[0];
 	}
 
 	function username($id) {
-		$this->Database = new Database();
+		$result = mysql_query("SELECT username FROM users WHERE id = '$id' LIMIT 1");
 
-		$row = mysql_fetch_row($this->Database->query("SELECT username FROM users WHERE id = '$id' LIMIT 1"));
+		$row = mysql_fetch_row();
 
 		if($id == 0){
 			return "Ingen användare";
@@ -140,9 +138,9 @@ class User {
 
 class Count {
 	function message() {
-		$this->Database = new Database();
+		$result = mysql_query("SELECT id FROM message WHERE deleted = '0' AND viewed = '0'");
 
-		$num_rows = mysql_num_rows($this->Database->query("SELECT id FROM message WHERE deleted = '0' AND viewed = '0'"));
+		$num_rows = mysql_num_rows();
 
 		if($num_rows < 1){
 			return "0";
@@ -152,9 +150,9 @@ class Count {
 	}
 
 	function write($sql) {
-		$this->Database = new Database();
+		$result = mysql_query($sql);
 
-		$num_rows = mysql_num_rows($this->Database->query($sql));
+		$num_rows = mysql_num_rows($result);
 
 		if($num_rows < 1){
 			return "0";
@@ -172,9 +170,9 @@ class Check {
 	}
 
 	function page($page) {
-		$this->Database = new Database();
+		$result = mysql_query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'");
 
-		$num_rows = mysql_num_rows($this->Database->query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'"));
+		$num_rows = mysql_num_rows($result);
 
 		if($num_rows != 1){
 			return 0;
@@ -184,11 +182,10 @@ class Check {
 	}
 
 	function admin() {
-		$this->Database = new Database();
-
 		$username = $_SESSION['user'];
 
-		$row = mysql_fetch_row($this->Database->query("SELECT rank FROM users WHERE username = '$username'"));
+		$result = mysql_query("SELECT rank FROM users WHERE username = '$username'");
+		$row = mysql_fetch_row($result);
 
 		if($row[0]){
 			return true;
