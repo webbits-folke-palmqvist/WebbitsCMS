@@ -125,7 +125,7 @@ class Count {
 	function message() {
 		$result = mysql_query("SELECT id FROM message WHERE deleted = '0' AND viewed = '0'");
 
-		$num_rows = mysql_num_rows();
+		$num_rows = @mysql_num_rows();
 
 		if($num_rows < 1){
 			return "0";

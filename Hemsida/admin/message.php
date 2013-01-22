@@ -53,7 +53,7 @@ if(!$sub){
 		<br>
 		<strong>Email:</strong> <?php echo $row[2]; ?>
 		<br>
-		<strong>Datum:</strong> <?php echo daten($row[4]); ?>
+		<strong>Datum:</strong> <?php echo $Database->then($row[4]); ?>
 		<hr>
 		<?php echo $row[3]; ?>
 		<?php
