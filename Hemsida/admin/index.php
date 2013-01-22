@@ -1,4 +1,5 @@
 <?php
+require('../assets/class.php');
 require('../assets/functions.php');
 include('../assets/database.php');
 
