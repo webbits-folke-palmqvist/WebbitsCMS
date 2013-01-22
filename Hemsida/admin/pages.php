@@ -1,4 +1,6 @@
 <?php
+$Check->login();
+
 $sub = @$_GET['sub'];
 
 if(!$sub){
