@@ -7,7 +7,7 @@ include('assets/_top.php');
 		<title>Beta</title>
 	</head>
 	<body>
-		<?php $Get->menu(); ?>
+		<?php $Get->menu('<a class="btn" href="', '">', '</a>'); ?>
 		<?php $Get->content(@$_GET['page']); ?>
 	</body>
 </html>

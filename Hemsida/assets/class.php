@@ -70,14 +70,12 @@ class Get {
 		}
 	}
 
-	function menu() {
+	function menu($a, $b, $c) {
 		$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
 		while($row = mysql_fetch_array($result)){
 			$name = $row['name'];
-			$name = str_replace("-"," ", $name);
-			?>
-			<a class="btn btn-block" href="?page=<?php echo $row['name']; ?>"><?php echo $name; ?></a>
-			<?php
+			$name2 = str_replace("-"," ", $name);
+			echo $a."?page=".$name."".$b."".$name2."".$c." ";
 		}
 	}
 
