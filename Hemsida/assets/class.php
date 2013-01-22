@@ -1,7 +1,7 @@
 <?php
 class Error {
 	function show() {
-		if($_SESSION['error']){
+		if(@$_SESSION['error']){
 			echo '<div class="alert alert-error">'.@$_SESSION['error'].'</div>';
 			unset($_SESSION['error']);
 		}
@@ -14,7 +14,7 @@ class Error {
 
 class Success {
 	function show() {
-		if($_SESSION['success']){
+		if(@$_SESSION['success']){
 			echo '<div class="alert alert-success">'.@$_SESSION['success'].'</div>';
 			unset($_SESSION['success']);
 		}
@@ -27,11 +27,16 @@ class Success {
 
 class Get {
 	function content($page) {
+
+		$this->Error = new Error();
+		$this->Success = new Success();
+		$this->Check = new Check();
+
 		$page = secure($page);
 
 		if(empty($page)){
 			$name = "hem";
-		} elseif (Checkpage($page) == 0) {
+		} elseif ($this->Check->page($page) == 0) {
 			$name = "404";
 		} else {
 			$name = $page;
@@ -43,8 +48,8 @@ class Get {
 		echo $row[0];
 
 		if($row[1] == 3){
-			$Success->show();
-			$Error->show();
+			$this->Success->show();
+			$this->Error->show();
 			?>
 			<form action="process.php?action=kontakt" method="POST">
 				<input class="input-fill" type="text" name="from_name" placeholder="Namn"><br />
@@ -143,6 +148,17 @@ class Check {
 	function login() {
 		if(!$_SESSION['user'] OR $_SESSION['user'] == "") {
 			header('location: logga-in.php');
+		}
+	}
+
+	function page($page) {
+		$result = mysql_query("SELECT * FROM pages WHERE name = '$page' AND deleted = '0'");
+		$num_rows = mysql_num_rows($result);
+
+		if($num_rows != 1){
+			return 0;
+		} else {
+			return $num_rows;
 		}
 	}
 
