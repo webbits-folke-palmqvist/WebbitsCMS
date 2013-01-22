@@ -22,6 +22,11 @@ switch ($page) {
 		$show_page = "404";
 		break;
 }
+
+$time = microtime();
+$time = explode(' ', $time);
+$time = $time[1] + $time[0];
+$start = $time;
 ?>
 <html>
 	<head>
@@ -52,6 +57,14 @@ switch ($page) {
 				include($show_page.'.php');
 				?>
 			</div>
+			<?php
+			$time = microtime();
+			$time = explode(' ', $time);
+			$time = $time[1] + $time[0];
+			$finish = $time;
+			$total_time = round(($finish - $start), 4);
+			?>
+			<center><i><?php echo "Sidan laddade på ".$total_time." sekunder"; ?></i></center>
 		</div>
 		<br>
 		<center><a class="btn" target="_Blank" href="http://webbits.nu/">Made by Webbits</a></center>
