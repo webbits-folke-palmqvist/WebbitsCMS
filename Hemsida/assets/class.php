@@ -1,19 +1,4 @@
 <?php
-class Database {
-	function connect() {
-		mysql_connect("localhost", "root", "root") or die(mysql_error());
-		mysql_select_db("webbitscms") or die(mysql_error());
-
-		mysql_query("SET NAMES utf8");
-		mysql_query("SET CHARACTER SET utf8");
-	}
-
-	function query($sql) {
-		$result = mysql_query("SELECT name FROM pages WHERE deleted = '0' AND name != '404'");
-		return $result;
-	}
-}
-
 class Error {
 	function show() {
 		if(@$_SESSION['error']){
