@@ -1,6 +1,5 @@
 <?php
-require('assets/functions.php');
-require('assets/class.php');
+include('assets/_top.php');
 
 $action = secure($_GET['action']);
 

@@ -1,7 +1,4 @@
 <?php
-@session_start();
-include('database.php');
-
 class Error {
 	function show() {
 		if($_SESSION['error']){
