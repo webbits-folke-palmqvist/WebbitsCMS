@@ -93,7 +93,7 @@ class User {
 		$username = $_SESSION['user'];
 
 		$result = mysql_query("SELECT rank FROM users WHERE username = '$username'");
-		$row = mysql_fetch_row();
+		$row = mysql_fetch_row($result);
 
 		return $row[0];
 	}
@@ -101,7 +101,7 @@ class User {
 	function id($username) {
 		$result = mysql_query("SELECT id FROM users WHERE username = '$username' LIMIT 1");
 
-		$row = mysql_fetch_row();
+		$row = mysql_fetch_row($result);
 
 		return $row[0];
 	}
@@ -109,7 +109,7 @@ class User {
 	function username($id) {
 		$result = mysql_query("SELECT username FROM users WHERE id = '$id' LIMIT 1");
 
-		$row = mysql_fetch_row();
+		$row = mysql_fetch_row($result);
 
 		if($id == 0){
 			return "Ingen användare";
