@@ -166,14 +166,14 @@ if($action == "kontakt"){
 
 	if(empty($from_email) OR empty($from_name) OR empty($content)){
 		$Error->set("* Fyll i alla fält.");
-		header('location: index.php?page='.GetContactName(3));
+		header('location: index.php?page='.$Get->page(3));
 	} else {
 		$sql = "INSERT INTO message(from_name, from_email, content, datetime)VALUES('$from_name', '$from_email', '$content', '$datetime')";
 		$add = mysql_query($sql);
 
 		if($add){
 			$Success->set("Ditt meddelande skickades");
-			header('location: index.php?page='.GetContactName(3));
+			header('location: index.php?page='.$Get->page(3));
 		}
 	}
 }
