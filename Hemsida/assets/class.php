@@ -79,7 +79,7 @@ class Get {
 		}
 	}
 
-	function name($id) {
+	function page($id) {
 		$result = mysql_query("SELECT name FROM pages WHERE id = '$id' AND deleted = '0' LIMIT 1");
 
 		$row = mysql_fetch_row($result);
@@ -123,7 +123,7 @@ class Count {
 	function message() {
 		$result = mysql_query("SELECT id FROM message WHERE deleted = '0' AND viewed = '0'");
 
-		$num_rows = @mysql_num_rows();
+		$num_rows = @mysql_num_rows($result);
 
 		if($num_rows < 1){
 			return "0";
