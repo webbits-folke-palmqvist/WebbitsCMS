@@ -31,9 +31,9 @@ if(!$sub){
 			<td><?php echo $row['username']; ?></td>
 			<td><a class="btn" href="?page=Members&sub=edit&id=<?php echo $row['id']; ?>">Ändra</a></td>
 			<?php
-			if($User->rank() != 9) {
+			if($row['rank'] != 9) {
 				?>
-				<td><a class="btn" href="../process.php?action=members&do=delete&id=<?php echo $row['id']; ?>">Ta bort</a></td>
+				<td><a class="btn" href="../process.php?action=users&do=delete&id=<?php echo $row['id']; ?>">Ta bort</a></td>
 				<?php 
 			}
 			?>

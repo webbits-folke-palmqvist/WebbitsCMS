@@ -216,8 +216,24 @@ if(!$action){
 				header('location: admin/?page=Members');
 			}
 		}
+	} elseif ($do == "delete") {
+		$id = secure($_GET['id']);
+		if(!$id){
+			header('location: admin/?page=Members');
+		} else {
+			$sql = "UPDATE users SET deleted = 1 WHERE id = '$id' LIMIT 1";
+			$update = mysql_query($sql);
+
+			if($update){
+				$Success->set("Användaren är nu borttagen.");
+				header('location: admin/?page=Members');
+			} else {
+				$Error->set("Något gick fel.");
+				header('location: admin/?page=Members');
+			}
+		}
 	}
 } else {
-	header('location: ?page='.$Get->page(3));
+	header('location: index.php?page='.$Get->page(1));
 }
 ?>
