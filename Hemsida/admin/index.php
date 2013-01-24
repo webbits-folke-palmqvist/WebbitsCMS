@@ -47,7 +47,7 @@ $start = $time;
 				  		if($Count->message() == 0){
 				  			?><a class="btn" href="?page=Message">Meddelanden (<?php echo $Count->message(); ?>)</a><?php
 				  		} else {
-				  			?><a class="btn" href="?page=Message"><strong>Meddelanden (<?php echo CountMessage(); ?>)</strong></a><?php
+				  			?><a class="btn" href="?page=Message"><strong>Meddelanden (<?php echo $Count->message(); ?>)</strong></a><?php
 				  		}
 				  		?>
 				  		<a class="btn" href="../process.php?action=logout">Logga ut</a>
