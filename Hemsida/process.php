@@ -5,9 +5,7 @@ $action = secure($_GET['action']);
 
 if(!$action){
 	header('location: index.php?page=Hem');
-}
-
-if($action == "login"){
+} elseif ($action == "login"){
 	$user = secure($_POST['username']);
 	$pass = md5(secure($_POST['password']));
 
@@ -32,14 +30,10 @@ if($action == "login"){
 		$Error->set("* Fel användarnamn eller lösenord.");
 		header('location: admin/logga-in.php');
 	}
-}
-
-if($action == "logout"){
+} elseif ($action == "logout"){
 	session_destroy();
 	header('location: admin/logga-in.php');
-}
-
-if($action == "register"){
+} elseif ($action == "register"){
 	$user = secure($_POST['username']);
 	$pass = secure($_POST['password']);
 	$pass2 = secure($_POST['password2']);
@@ -71,9 +65,7 @@ if($action == "register"){
 			header('location: ?page=Registrera');
 		}
 	}
-}
-
-if($action == "message"){
+} elseif ($action == "message"){
 	$do = secure($_GET['do']);
 
 	if($do == "delete"){
@@ -90,9 +82,7 @@ if($action == "message"){
 			}
 		}
 	}
-}
-
-if($action == "pages"){
+} elseif ($action == "pages"){
 	$do = secure($_GET['do']);
 
 	if($do == "add"){
@@ -153,12 +143,13 @@ if($action == "pages"){
 			if($update){
 				$Success->set("Sidan är nu borttaget.");
 				header('location: admin/?page=Pages');
+			} else {
+				$Error->set("Något gick fel.");
+				header('location: admin/?page=Pages');
 			}
 		}
 	}
-}
-
-if($action == "kontakt"){
+} elseif ($action == "kontakt"){
 	$from_name = secure($_POST['from_name']);
 	$from_email = secure($_POST['from_email']);
 	$content = secure($_POST['content']);
@@ -176,5 +167,57 @@ if($action == "kontakt"){
 			header('location: index.php?page='.$Get->page(3));
 		}
 	}
+} elseif ($action == "users") {
+	$do = $_GET['do'];
+
+	if($do == "edit") {
+		$id = secure($_GET['id']);
+		$username = secure($_POST['username']);
+		$password = secure($_POST['password']);
+		$rank = secure($_POST['rank']);
+
+		if(empty($username) OR empty($rank)){
+			$Error->set("Något gick fel.");
+			header('location: admin/?page=Members&sub=edit&id='.$id);
+		} else {
+			if(empty($password)) {
+				$sql = "UPDATE users SET username = '$username', rank = '$rank' WHERE id = '$id' LIMIT 1";
+				$update = mysql_query($sql);
+
+				if($update){
+					$Success->set("Ändringarna är nu sparade.");
+					header('location: admin/?page=Members&sub=edit&id='.$id);;
+				}
+			} else {
+				$sql = "UPDATE users SET username = '$username', password = '$password', rank = '$rank' WHERE id = '$id' LIMIT 1";
+				$update = mysql_query($sql);
+
+				if($update){
+					$Success->set("Ändringarna är nu sparade.");
+					header('location: admin/?page=Members&sub=edit&id='.$id);;
+				}
+			}
+		}
+	} elseif ($do == "add") {
+		$username = secure($_POST['username']);
+		$password = secure($_POST['password']);
+		$rank = secure($_POST['rank']);
+
+		if(empty($username) OR empty($password) OR empty($rank)){
+			$Error->set("Fyll i alla fält.");
+			header('location: admin/?page=Members&sub=add');
+		} else {
+			$password = md5($password);
+			$sql = "INSERT INTO users(username, password, rank, deleted)VALUES('$username', '$password', '$rank', '0')";
+			$add = mysql_query($sql);
+
+			if($add){
+				$Success->set("Användaren har nu skapats.");
+				header('location: admin/?page=Members');
+			}
+		}
+	}
+} else {
+	header('location: ?page='.$Get->page(3));
 }
 ?>

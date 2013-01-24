@@ -4,7 +4,7 @@ $Check->login();
 $sub = @$_GET['sub'];
 
 if(!$sub){
-
+	$Error->show();
 	$Success->show();
 	?>
 	<table class="table table-hover">
