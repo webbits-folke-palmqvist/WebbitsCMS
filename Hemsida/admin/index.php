@@ -18,6 +18,9 @@ switch ($page) {
 	case 'Message':
 		$show_page = "message";
 		break;
+	case 'Members':
+		$show_page = "members";
+		break;
 	default:
 		$show_page = "404";
 		break;
@@ -41,7 +44,7 @@ $start = $time;
 				<ul class="breadcrumb">
 				  	<li><a class="btn" href="?page=Start">Start</a></li>
 				  	<li><a class="btn" href="?page=Pages">Alla sidor</a></li>
-				  	<!--<li><a class="btn" href="#">Alla användare</a></li>-->
+				  	<li><a class="btn" href="?page=Members">Alla användare</a></li>
 				  	<li class="pull-right">
 				  		<?php
 				  		if($Count->message() == 0){
