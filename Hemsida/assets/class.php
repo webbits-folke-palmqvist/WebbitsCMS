@@ -147,7 +147,7 @@ class Count {
 
 class Check {
 	function login() {
-		if(!$_SESSION['user'] OR $_SESSION['user'] == "") {
+		if(!@$_SESSION['user'] OR @$_SESSION['user'] == "") {
 			header('location: logga-in.php');
 		}
 	}
