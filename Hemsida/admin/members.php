@@ -96,8 +96,7 @@ if(!$sub){
 					<td><strong>Rank:</strong></td>
 					<td>
 						<select name="rank">
-						  	<option value="0">Bannad</option>
-						  	<option value="1" selected>Medlem</option>
+						  	<option value="1">Medlem</option>
 						  	<option value="9">Admin</option>
 						</select>
 					</td>
